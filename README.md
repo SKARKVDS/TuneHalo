@@ -87,10 +87,21 @@ dotnet build -c Release
 dotnet run -c Release
 ```
 
-Exe autonome (aucun runtime .NET requis sur le poste cible) :
+## Installer
+
+Télécharger `TuneHalo-Setup-<version>.exe` depuis la page [Releases](https://github.com/SKARKVDS/TuneHalo/releases) et le lancer :
+- installation par utilisateur, sans droits administrateur, dans `%LOCALAPPDATA%\Programs\TuneHalo` ;
+- exe autonome (aucun runtime .NET à installer) ;
+- raccourci menu Démarrer, option de démarrage avec la session, désinstalleur (Paramètres Windows › Applications).
+
+L'installeur n'est pas signé : Windows SmartScreen peut afficher « Windows a protégé votre ordinateur », cliquer sur **Informations complémentaires › Exécuter quand même**.
+
+## Construire l'installeur
+
+Prérequis : .NET 10 SDK et Inno Setup 6 (`winget install JRSoftware.InnoSetup`).
 
 ```powershell
-dotnet publish -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -o publish
+powershell -ExecutionPolicy Bypass -File installeruild-installer.ps1 -Version 1.0.0
 ```
 
-Pas encore d'installeur ; le moment venu, reprendre l'approche Inno Setup de QuotaHalo avec un nouvel `AppId`.
+Produit `installer\Output\TuneHalo-Setup-<version>.exe`. L'icône est `app.ico` (intégrée à l'exe et utilisée pour la zone de notification).

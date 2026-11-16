@@ -261,24 +261,9 @@ public partial class App : Application
 
     private static System.Drawing.Icon MakeIcon()
     {
-        const int px = 64;
-        var g = new System.Windows.Controls.Grid { Width = px, Height = px };
-        g.Children.Add(new Ellipse { Fill = new SolidColorBrush(Color.FromRgb(0x1D, 0xB9, 0x54)) });
-        g.Children.Add(new System.Windows.Controls.TextBlock
-        {
-            Text = Glyph.Note, FontFamily = new FontFamily("Segoe Fluent Icons, Segoe MDL2 Assets"), FontSize = 34,
-            Foreground = Brushes.Black, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center,
-        });
-        g.Measure(new Size(px, px));
-        g.Arrange(new Rect(0, 0, px, px));
-        var rtb = new RenderTargetBitmap(px, px, 96, 96, PixelFormats.Pbgra32);
-        rtb.Render(g);
-        var enc = new PngBitmapEncoder();
-        enc.Frames.Add(BitmapFrame.Create(rtb));
-        using var ms = new MemoryStream();
-        enc.Save(ms);
-        ms.Position = 0;
-        using var bmp = new System.Drawing.Bitmap(ms);
-        return System.Drawing.Icon.FromHandle(bmp.GetHicon());
+        // app.ico is embedded as a WPF resource; pick the size Windows wants for the tray.
+        var info = GetResourceStream(new Uri("pack://application:,,,/app.ico"));
+        using var s = info!.Stream;
+        return new System.Drawing.Icon(s, WF.SystemInformation.SmallIconSize);
     }
 }
