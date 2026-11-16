@@ -1,0 +1,68 @@
+<Window x:Class="TuneHalo.PanelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TuneHalo" Width="340" SizeToContent="Height" WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent" Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize">
+  <Border Margin="10" CornerRadius="16" Background="#F5181818" BorderBrush="#30FFFFFF" BorderThickness="1" Padding="12">
+    <Border.Effect>
+      <DropShadowEffect BlurRadius="14" ShadowDepth="0" Opacity="0.6" Color="Black"/>
+    </Border.Effect>
+    <StackPanel>
+      <!-- track -->
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Border Width="56" Height="56" CornerRadius="8" Background="#2A2A2A">
+          <Grid>
+            <TextBlock Text="&#xEC4F;" FontFamily="{StaticResource Icons}" FontSize="20" Foreground="#777"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Border x:Name="Cover" CornerRadius="8"/>
+          </Grid>
+        </Border>
+        <StackPanel Grid.Column="1" Margin="12,0,4,0" VerticalAlignment="Center">
+          <TextBlock x:Name="TitleText" Text="Spotify" Foreground="White" FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+          <TextBlock x:Name="ArtistText" Foreground="#B3B3B3" FontSize="12" Margin="0,2,0,0" TextTrimming="CharacterEllipsis"/>
+        </StackPanel>
+        <Button x:Name="LikeButton" Grid.Column="2" Style="{StaticResource IconButton}" Content="&#xEB51;" ToolTip="Liker"/>
+      </Grid>
+
+      <!-- progress -->
+      <Grid Margin="0,10,0,0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="PosText" Foreground="#9A9A9A" FontSize="10" Text="0:00" VerticalAlignment="Center"/>
+        <Grid Grid.Column="1" Margin="8,0" Height="4" VerticalAlignment="Center">
+          <Border CornerRadius="2" Background="#44FFFFFF"/>
+          <Border x:Name="ProgressFill" CornerRadius="2" Background="White" HorizontalAlignment="Left" Width="0"/>
+        </Grid>
+        <TextBlock x:Name="DurText" Grid.Column="2" Foreground="#9A9A9A" FontSize="10" Text="0:00" VerticalAlignment="Center"/>
+      </Grid>
+
+      <!-- controls -->
+      <Grid Margin="0,8,0,0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal">
+          <Button x:Name="PrevButton" Style="{StaticResource IconButton}" Content="&#xE892;" ToolTip="Précédent"/>
+          <Button x:Name="PlayButton" Style="{StaticResource IconButton}" Content="&#xE768;" Width="44" Height="44" Margin="4,0"
+                  Background="White" Foreground="Black" FontSize="18" ToolTip="Lecture / pause"/>
+          <Button x:Name="NextButton" Style="{StaticResource IconButton}" Content="&#xE893;" ToolTip="Suivant"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+          <Button x:Name="MuteButton" Style="{StaticResource IconButton}" Content="&#xE767;" Width="30" Height="30" FontSize="14" ToolTip="Couper le son de Spotify"/>
+          <Slider x:Name="VolumeSlider" Style="{StaticResource VolumeSlider}" Width="100" Margin="4,0,0,0" VerticalAlignment="Center"/>
+          <TextBlock x:Name="VolumeText" Foreground="#9A9A9A" FontSize="10" Width="30" TextAlignment="Right" VerticalAlignment="Center"/>
+        </StackPanel>
+      </Grid>
+    </StackPanel>
+  </Border>
+</Window>
